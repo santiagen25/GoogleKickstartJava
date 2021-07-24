@@ -16,23 +16,22 @@ public class Solution {
 			//p("N = " + N + "\tS = " + S);
 
 			int[] result = new int[N];
+			int actual = 1;
+			int pivote = 0;
+			int j = 1;
 
-			for (int position = 1; position <= N; position++) {
-				//todo
-				String part = S.substring(0,position);
-				int partlength = part.length();
-				char[] parts = part.toCharArray();
-				int actual = 1;
-				for (int i = 1; i < partlength; i++) {
-					char first = parts[i-1];
-					char second = parts[i];
-					
-					p("partlength: "+partlength+"\ti: "+i+"\tfirst: "+first+"\tsecond: "+second);
-
-					if (first < second) actual++;
-					else break;
+			result[0] = 1;
+			for (int i = 1; i < N; i++,j++) {
+				char first = S.charAt(pivote);
+				char second = S.charAt(pivote+j);
+				if(first < second) {
+					result[i] = ++actual;
+				} else {
+					result[i] = 1;
+					actual = 0;
+					j = 0;
+					pivote = i;
 				}
-				result[position-1] = actual;
 			}
 			
 			
