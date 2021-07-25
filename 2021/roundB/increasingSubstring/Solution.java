@@ -17,20 +17,16 @@ public class Solution {
 
 			int[] result = new int[N];
 			int actual = 1;
-			int pivote = 0;
-			int j = 1;
 
 			result[0] = 1;
-			for (int i = 1; i < N; i++,j++) {
-				char first = S.charAt(pivote);
-				char second = S.charAt(pivote+j);
+			for (int i = 1; i < N; i++) {
+				char first = S.charAt(i-1);
+				char second = S.charAt(i);
 				if(first < second) {
 					result[i] = ++actual;
 				} else {
 					result[i] = 1;
-					actual = 0;
-					j = 0;
-					pivote = i;
+					actual = 1;
 				}
 			}
 			
