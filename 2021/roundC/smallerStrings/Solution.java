@@ -12,27 +12,33 @@ public class Solution {
 			sc.nextLine();
 			String S = sc.nextLine();
 
-			p("N = "+N+"\nK = "+K+"\nS = "+S);
 
 			//Setup
-			String ans = "";
-			int greatestValue = 0;
-			String[] result = new String[N];
+			
+			//limiteJ redondea para arriba, hacia el numero par (de 3 a 4, de 4 a 4, de 5 a 6, ...)
+			int Nexp = (N + (N % 2));
+			//K^(Nexp/2) son todas las repeticiones posibles que existen
 
-			for(int i = 0; i < N; i++) {
-				char c = S.charAt(i);
-				if((int)c > greatestValue) greatestValue = c;
-				
-				ans = "";
+			int palindromes = 1;
+			for (int i = 0; i < N/2; i++) {
+				char first = S.charAt(i);
+				char last = S.charAt(S.length() - 1 - i);
+
+				char leastChar = 'a';
+
+				if (first < last) leastChar = first;
+				else leastChar = last;
+
+				int leastNum = (Character.getNumericValue(leastChar) - 9);
+				//p("least num is "+leastNum);
+				palindromes = palindromes * leastNum;
 			}
 
-			for(int i = 0; i < N; i++){
-				
-			}
+			palindromes--;
 
-			p("greatestValue: "+greatestValue);
 
-			p("Case #" + caseId + ": " + ans);
+			//answer
+			p("Case #" + caseId + ": " + palindromes);
 		 }
 	}
 
