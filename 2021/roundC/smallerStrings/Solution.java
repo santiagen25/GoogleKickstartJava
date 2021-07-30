@@ -19,8 +19,10 @@ public class Solution {
 			int Nexp = (N + (N % 2));
 			//K^(Nexp/2) son todas las repeticiones posibles que existen
 
+			int interations = (N/2) + (N%2);
+			int[] multiplicadores = new int[interations];
 			int palindromes = 1;
-			for (int i = 0; i < N/2; i++) {
+			for (int i = 0; i < interations; i++) {
 				char first = S.charAt(i);
 				char last = S.charAt(S.length() - 1 - i);
 
@@ -28,10 +30,24 @@ public class Solution {
 
 				if (first < last) leastChar = first;
 				else leastChar = last;
+				int numericValOfChar = (int) leastChar - 97;
 
-				int leastNum = (Character.getNumericValue(leastChar) - 9);
-				//p("least num is "+leastNum);
-				palindromes = palindromes * leastNum;
+				multiplicadores[i] = numericValOfChar;
+
+				p("numeric value of "+leastChar+" is "+numericValOfChar);
+				
+				int power = 0;
+				int newN = N - (i*2);
+				int exponent = (newN%2) + (newN/2);
+
+				if (numericValOfChar > 0) {
+					//p("K = "+K+" and exponent = "+exponent);
+					power = (int) Math.pow(K, exponent);
+				}
+
+				palindromes += power;
+
+				//int leastNum = (Character.getNumericValue(leastChar) - 9);
 			}
 
 			palindromes--;
